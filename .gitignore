@@ -1,9 +1,16 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# generated contract types
+/src/types/v3
+/src/abis/types
+/src/locales/**/*.js
+/src/locales/**/*.ts
+/src/locales/**/*.json
+/src/locales/**/en-US.po
+/src/state/data/generated.ts
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
 
 # testing
 /coverage
@@ -18,6 +25,19 @@
 .env.test.local
 .env.production.local
 
+/.netlify
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+notes.txt
+.idea/
+
+.vscode/
+
+package-lock.json
+
+cypress/videos
+cypress/screenshots
+cypress/fixtures/example.json
