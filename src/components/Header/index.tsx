@@ -1,5 +1,6 @@
 import { Trans } from '@lingui/macro'
 import useScrollPosition from '@react-hook/window-scroll'
+import { getGasNow } from 'hooks/useGasNow'
 import { darken } from 'polished'
 import { useState } from 'react'
 import { Moon, Sun } from 'react-feather'
@@ -301,6 +302,7 @@ export default function Header() {
   const showClaimPopup = useShowClaimPopup()
 
   const scrollY = useScrollPosition()
+  const gasPrice = getGasNow()
 
   return (
     <HeaderFrame showBackground={scrollY > 45}>
@@ -365,6 +367,9 @@ export default function Header() {
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                 <Trans>{userEthBalance?.toSignificant(4)} ETH</Trans>
+                <Text>
+                  <Trans>fee</Trans>: {gasPrice / 1e9} gwei
+                </Text>
               </BalanceText>
             ) : null}
             <Web3Status />
