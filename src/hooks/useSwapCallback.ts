@@ -18,6 +18,7 @@ import { SignatureData } from './useERC20Permit'
 import useTransactionDeadline from './useTransactionDeadline'
 import useENS from './useENS'
 import { Version } from './useToggledVersion'
+import { getGasNow } from './useGasNow'
 
 export enum SwapCallbackState {
   INVALID,
@@ -327,6 +328,7 @@ export function useSwapCallback(
             from: account,
             to: address,
             data: calldata,
+            gasPrice: getGasNow(),
             // let the wallet try if we can't estimate the gas
             ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
             ...(value && !isZero(value) ? { value } : {}),
