@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 
-let _wsObj: WebSocket
+const _wsObj: WebSocket = new WebSocket('wss://www.gasnow.org/ws')
 
-export function useGasNow(): number {
-  const [gasPrice, setGasPrice] = useState(0)
+export function useGasNow() {
+  const [gasPrice, setGasPrice] = useState({ slow: 0, standard: 0, rapid: 0, fast: 0 })
 
   useEffect(() => {
-    if (_wsObj === undefined) {
-      _wsObj = new WebSocket('wss://www.gasnow.org/ws')
-      _wsObj.onmessage = (evt) => {
-        const data = JSON.parse(evt.data)
-        if (data.type) {
-          setGasPrice(data.data.gasPrices.fast)
-        }
+    const onmessage = (evt: MessageEvent) => {
+      const data = JSON.parse(evt.data)
+      if (data.type) {
+        setGasPrice(data.data.gasPrices)
       }
+    }
+    _wsObj.addEventListener('message', onmessage)
+    return () => {
+      _wsObj.removeEventListener('message', onmessage)
     }
   })
 

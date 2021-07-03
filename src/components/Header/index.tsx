@@ -368,7 +368,7 @@ export default function Header() {
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
                 <Trans>{userEthBalance?.toSignificant(4)} ETH</Trans>
                 <Text>
-                  <Trans>gas price</Trans>: {gasPrice / 1e9} gwei
+                  <Trans>gas price</Trans>: {gasPrice.fast / 1e9} gwei
                 </Text>
               </BalanceText>
             ) : null}
